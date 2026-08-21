@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirigiendo…</title>
+  <script>
+    // GitHub Pages SPA fallback: reenvía la ruta solicitada a index.html
+    (function () {
+      var seg = window.location.pathname.split('/').filter(Boolean);
+      var path = seg.length ? '/' + seg.join('/') : '/home';
+      var base = window.location.pathname.replace(/[^/]*$/, '');
+      window.location.replace(base + 'index.html?p=' + encodeURIComponent(path));
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirigiendo…</p>
+</body>
+</html>
