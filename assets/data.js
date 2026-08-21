@@ -6,7 +6,7 @@
 window.CEMETERY = {
   name: 'El Guasimal',
   tagline: 'Registro de Patrimonio Funerario',
-  period: '1800 – 1970',
+  period: '1800 – 2026',
   founded: '1888',
   rebuilt: '1979',
   ageAtStudy: '138 años',
