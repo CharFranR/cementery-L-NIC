@@ -1,8 +1,3 @@
-// ==========================================================================
-// El Guasimal · Preview Server
-// Serves the built dist/ folder for local preview
-// ==========================================================================
-
 import { file, serve } from "bun";
 import { join } from "path";
 

@@ -1,8 +1,3 @@
-// ==========================================================================
-// El Guasimal · Build Script
-// Bundles TypeScript → dist/ for GitHub Pages deployment
-// ==========================================================================
-
 import { $ } from "bun";
 
 const DIST = "dist";

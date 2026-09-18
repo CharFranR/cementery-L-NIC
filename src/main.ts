@@ -1,16 +1,9 @@
-// ==========================================================================
-// El Guasimal · SPA Router (TypeScript)
-// Routes:  /  -> /home   |   /home  -> landing   |   /:slug -> tomb detail
-// ==========================================================================
-
 import { CEMETERY, TOMBS } from "./data";
 import { icon } from "./icons";
 import type { Fact, Stat, Tomb } from "./types";
 
-// --- PDF URL ---
 const PDF_URL = "docs/RESULTADOS DEL ESTUDION ARQUITECTONICO.pdf";
 
-// --- Helpers ---
 function esc(s: string): string {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -23,7 +16,6 @@ function sectionLabel(text: string): string {
   return `<span class="section-label">${esc(text)}<i class="line"></i></span>`;
 }
 
-// --- Base path (supports subdirectory deployment, e.g. GitHub Pages) ---
 let basePath = "/";
 if (document.currentScript) {
   const u = new URL((document.currentScript as HTMLScriptElement).src);
@@ -203,7 +195,7 @@ function renderDetail(tomb: Tomb): void {
 
   const facts = Object.keys(tomb.facts)
     .map((k: string) => {
-      let v = tomb.facts[k];
+      let v = tomb.facts[k] ?? "";
       if (k === "Registro") {
         v = `<span class="code-chip">${esc(v)}</span>`;
       } else {
@@ -274,7 +266,6 @@ function renderNotFound(): void {
     footer();
 }
 
-// --- Render by route ---
 function render(): void {
   const route = currentRoute();
 
@@ -298,7 +289,6 @@ function render(): void {
   }
 }
 
-// --- Events ---
 document.addEventListener("click", (e: MouseEvent) => {
   const target = e.target as HTMLElement;
   const a = target.closest?.("a[data-nav]") as HTMLAnchorElement | null;

@@ -1,8 +1,3 @@
-// ==========================================================================
-// El Guasimal · Cemetery Data
-// Data extracted from "RESULTADOS DEL ESTUDIO ARQUITECTÓNICO"
-// ==========================================================================
-
 import type { Cemetery, Tomb } from "./types";
 
 export const CEMETERY: Cemetery = {
