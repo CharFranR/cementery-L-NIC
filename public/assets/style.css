@@ -187,21 +187,12 @@ img {
   color: var(--color-text);
 }
 
-.nav-cta {
-  font-family: var(--font-body);
-  font-size: 11px;
+.nav-link.is-active {
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
   color: var(--color-gold);
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid var(--color-gold);
   padding-bottom: 3px;
   transition: border-color var(--transition), color var(--transition);
-}
-
-.nav-cta:hover {
-  color: var(--color-gold-light);
-  border-color: var(--color-gold);
 }
 
 @media (max-width: 640px) {

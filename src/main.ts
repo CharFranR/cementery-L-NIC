@@ -2,8 +2,6 @@ import { CEMETERY, HISTORY, TOMBS } from "./data";
 import { icon } from "./icons";
 import type { Fact, Stat, Tomb } from "./types";
 
-const PDF_URL = "docs/RESULTADOS DEL ESTUDION ARQUITECTONICO.pdf";
-
 function esc(s: string): string {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -67,13 +65,18 @@ function brand(): string {
 }
 
 function navBar(): string {
+  const active = currentRoute() === "/historia" ? "/historia" : "/home";
+  const link = (to: string, label: string) => {
+    const cls = `nav-link${to === active ? " is-active" : ""}`;
+    const aria = to === active ? ' aria-current="page"' : "";
+    return `<a class="${cls}" href="${fullHref(to)}" data-nav="${to}"${aria}>${label}</a>`;
+  };
   return (
     `<header class="navbar"><div class="container navbar-inner">` +
     brand() +
     `<nav class="nav-links">` +
-    `<a class="nav-link" href="${fullHref("/home")}" data-nav="/home">Inicio</a>` +
-    `<a class="nav-link" href="${fullHref("/historia")}" data-nav="/historia">Historia</a>` +
-    `<a class="nav-cta" href="${esc(encodeURI(PDF_URL))}">Documento PDF</a>` +
+    link("/home", "Inicio") +
+    link("/historia", "Historia") +
     `</nav>` +
     `</div></header>`
   );
@@ -100,7 +103,6 @@ function footer(): string {
     `<div class="footer-links">` +
     `<a href="${fullHref("/home")}" data-nav="/home">Inicio</a>` +
     `<a href="${fullHref("/historia")}" data-nav="/historia">Historia</a>` +
-    `<a href="${esc(encodeURI(PDF_URL))}">Estudio (PDF)</a>` +
     `</div>` +
     `</div></footer>` +
     backToTop()
@@ -150,7 +152,6 @@ function renderHome(): void {
     `Un recorrido por la arquitectura funeraria popular, su estilo, sus materiales y su simbolismo.</p>` +
     `<div class="hero-actions">` +
     `<a class="btn-primary" href="#monumentos">Explorar monumentos ${icon("arrow-right")}</a>` +
-    `<a class="btn-secondary" href="${esc(encodeURI(PDF_URL))}">Ver documento</a>` +
     `</div>` +
     `</div></div>` +
     `</section>` +
