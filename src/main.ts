@@ -1,4 +1,4 @@
-import { CEMETERY, TOMBS } from "./data";
+import { CEMETERY, HISTORY, TOMBS } from "./data";
 import { icon } from "./icons";
 import type { Fact, Stat, Tomb } from "./types";
 
@@ -72,6 +72,7 @@ function navBar(): string {
     brand() +
     `<nav class="nav-links">` +
     `<a class="nav-link" href="${fullHref("/home")}" data-nav="/home">Inicio</a>` +
+    `<a class="nav-link" href="${fullHref("/historia")}" data-nav="/historia">Historia</a>` +
     `<a class="nav-cta" href="${esc(encodeURI(PDF_URL))}">Documento PDF</a>` +
     `</nav>` +
     `</div></header>`
@@ -98,6 +99,7 @@ function footer(): string {
     `<p>© ${new Date().getFullYear()} · Cementerio El Guasimal (${esc(CEMETERY.period)}) · Registro de Patrimonio Funerario</p>` +
     `<div class="footer-links">` +
     `<a href="${fullHref("/home")}" data-nav="/home">Inicio</a>` +
+    `<a href="${fullHref("/historia")}" data-nav="/historia">Historia</a>` +
     `<a href="${esc(encodeURI(PDF_URL))}">Estudio (PDF)</a>` +
     `</div>` +
     `</div></footer>` +
@@ -152,6 +154,11 @@ function renderHome(): void {
     `</div>` +
     `</div></div>` +
     `</section>` +
+
+    `<section class="section-bridge"><div class="container bridge-inner">` +
+    `<p class="bridge-text">Fundado en 1888 como acto de solidaridad para las familias más vulnerables del barrio Guadalupe, El Guasimal custodia más de un siglo de memoria, fe y arquitectura funeraria popular.</p>` +
+    `<a class="bridge-link" href="${fullHref("/historia")}" data-nav="/historia">Conocé su historia completa ${icon("arrow-right")}</a>` +
+    `</div></section>` +
 
     `<section class="section" id="sobre"><div class="container about-grid">` +
     `<div class="about-media"><div class="gold-frame"><img src="${esc(CEMETERY.aboutImage)}" alt="Estela funeraria de El Guasimal" /></div></div>` +
@@ -252,6 +259,78 @@ function renderDetail(tomb: Tomb): void {
   document.getElementById("app")!.innerHTML = html;
 }
 
+function renderHistory(): void {
+  document.title = "Historia · El Guasimal";
+
+  const originParas = HISTORY.origin.paragraphs
+    .map((p, i) => `<p${i === 0 ? ' class="lead"' : ""}>${esc(p)}</p>`)
+    .join("");
+
+  const figures = HISTORY.figures
+    .map(
+      (f) =>
+        `<article class="history-figure">` +
+        `<div class="figure-marker"></div>` +
+        `<div class="figure-body">` +
+        `<h3 class="figure-name">${esc(f.name)}</h3>` +
+        `<span class="figure-role">${esc(f.role)}</span>` +
+        `<p>${esc(f.description)}</p>` +
+        `</div></article>`
+    )
+    .join("");
+
+  const memory = HISTORY.memory
+    .map(
+      (m) =>
+        `<article class="memory-card">` +
+        `<h3 class="memory-heading">${esc(m.heading)}</h3>` +
+        `<p>${esc(m.text)}</p>` +
+        `</article>`
+    )
+    .join("");
+
+  const html =
+    navBar() +
+    `<section class="detail-hero">` +
+    `<img class="hero-img" src="${esc(HISTORY.heroImage)}" alt="Cementerio El Guasimal" />` +
+    `<div class="hero-overlay"></div>` +
+    `<div class="container hero-inner"><div class="hero-content">` +
+    `<a class="back-link" href="${fullHref("/home")}" data-nav="/home">${icon("arrow-left")} Volver al inicio</a>` +
+    `<span class="hero-label">${esc(HISTORY.subtitle)}</span>` +
+    `<h1 class="detail-title">${esc(HISTORY.title)}</h1>` +
+    `</div></div>` +
+    `</section>` +
+
+    `<section class="section"><div class="container">` +
+    `<div class="section-head">` +
+    sectionLabel("Origen y fundación") +
+    `<h2>${esc(HISTORY.origin.heading)}</h2>` +
+    `</div>` +
+    `<div class="prose-container">${originParas}</div>` +
+    `</div></section>` +
+
+    `<section class="section section-dark"><div class="container">` +
+    `<div class="section-head">` +
+    sectionLabel("Personajes históricos") +
+    `<h2>Relevancia histórica de personajes sepultados</h2>` +
+    `<p>Para preservar la memoria histórica de la institución, la actual directiva está recopilando datos para montar una galería en honor a los antiguos miembros que sostuvieron el cementerio a través de las décadas.</p>` +
+    `</div>` +
+    `<div class="figures-timeline">${figures}</div>` +
+    `</div></section>` +
+
+    `<section class="section"><div class="container">` +
+    `<div class="section-head">` +
+    sectionLabel("Contribución a la memoria colectiva") +
+    `<h2>Memoria colectiva</h2>` +
+    `<p>El cementerio Guasimal contribuye a la memoria colectiva de la comunidad a través de su valor como espacio sagrado, su documentación histórica y la preservación de tradiciones socioculturales.</p>` +
+    `</div>` +
+    `<div class="memory-grid">${memory}</div>` +
+    `</div></section>` +
+    footer();
+
+  document.getElementById("app")!.innerHTML = html;
+}
+
 function renderNotFound(): void {
   document.title = "No encontrado · El Guasimal";
   document.getElementById("app")!.innerHTML =
@@ -276,6 +355,11 @@ function render(): void {
     route === ""
   ) {
     renderHome();
+    return;
+  }
+
+  if (route === "/historia") {
+    renderHistory();
     return;
   }
 

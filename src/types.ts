@@ -43,3 +43,30 @@ export interface Stat {
   value: string;
   label: string;
 }
+
+/* ---------- History page types ---------- */
+
+export interface HistorySection {
+  heading: string;
+  paragraphs: string[];
+}
+
+export interface HistoricalFigure {
+  name: string;
+  role: string;
+  description: string;
+}
+
+export interface MemoryContribution {
+  heading: string;
+  text: string;
+}
+
+export interface History {
+  title: string;
+  subtitle: string;
+  heroImage: string;
+  origin: HistorySection;
+  figures: HistoricalFigure[];
+  memory: MemoryContribution[];
+}
