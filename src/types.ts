@@ -55,11 +55,13 @@ export interface HistoricalFigure {
   name: string;
   role: string;
   description: string;
+  images: string[];
 }
 
 export interface MemoryContribution {
   heading: string;
   text: string;
+  images: string[];
 }
 
 export interface History {
