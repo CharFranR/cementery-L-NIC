@@ -267,26 +267,51 @@ function renderHistory(): void {
     .join("");
 
   const figures = HISTORY.figures
-    .map(
-      (f) =>
+    .map((f) => {
+      const photos =
+        f.images.length > 0
+          ? `<div class="figure-photos">` +
+            f.images
+              .map(
+                (img) =>
+                  `<img class="figure-photo" src="${esc(img)}" alt="${esc(f.name)}" loading="lazy" />`
+              )
+              .join("") +
+            `</div>`
+          : `<div class="figure-photos figure-photos--empty">` +
+            icon("tombstone") +
+            `<span>Sin registro fotográfico</span>` +
+            `</div>`;
+      return (
         `<article class="history-figure">` +
         `<div class="figure-marker"></div>` +
         `<div class="figure-body">` +
         `<h3 class="figure-name">${esc(f.name)}</h3>` +
         `<span class="figure-role">${esc(f.role)}</span>` +
+        photos +
         `<p>${esc(f.description)}</p>` +
         `</div></article>`
-    )
+      );
+    })
     .join("");
 
   const memory = HISTORY.memory
-    .map(
-      (m) =>
+    .map((m) => {
+      const photo =
+        m.images.length > 0
+          ? `<img class="memory-photo" src="${esc(m.images[0])}" alt="${esc(m.heading)}" loading="lazy" />`
+          : `<div class="memory-photo memory-photo--empty">` +
+            icon("tombstone") +
+            `<span>Sin registro fotográfico</span>` +
+            `</div>`;
+      return (
         `<article class="memory-card">` +
+        photo +
         `<h3 class="memory-heading">${esc(m.heading)}</h3>` +
         `<p>${esc(m.text)}</p>` +
         `</article>`
-    )
+      );
+    })
     .join("");
 
   const html =
