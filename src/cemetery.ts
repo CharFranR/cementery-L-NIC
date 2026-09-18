@@ -8,7 +8,7 @@ export const CEMETERY: Cemetery = {
   rebuilt: "1979",
   ageAtStudy: "138 años",
   tombsCount: "8",
-  heroImage: "assets/img/baltazar-bravo-1909.jpg",
+  heroImage: "assets/img/guasimal.jpeg",
   aboutImage: "assets/img/rosalia-velazquez-1927.jpg",
   aboutLead:
     "Un camposanto fundado en 1888 que custodia, entre fosas directas al suelo, una de las colecciones más representativas de arquitectura funeraria popular de la región.",

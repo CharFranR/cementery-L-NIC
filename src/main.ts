@@ -125,7 +125,6 @@ function renderHome(): void {
       `<div class="tomb-media"><img src="${esc(t.image)}" alt="${esc(t.title)}" loading="lazy" /></div>` +
       `<div class="tomb-card-body">` +
       `<span class="tomb-eyebrow">${esc(t.id)} · ${esc(t.years)}</span>` +
-      `<h3 class="tomb-title">${esc(t.title)}</h3>` +
       `<span class="tomb-style">${esc(t.style)}</span>` +
       `<p class="tomb-desc">${esc(t.brief)}</p>` +
       `<span class="tomb-link">Ver monumento ${icon("arrow-right")}</span>` +
@@ -202,6 +201,7 @@ function renderDetail(tomb: Tomb): void {
   document.title = `${tomb.title} · El Guasimal`;
 
   const facts = Object.keys(tomb.facts)
+    .filter((k) => !/^Difunt(o|a|os)$/.test(k))
     .map((k: string) => {
       let v = tomb.facts[k] ?? "";
       if (k === "Registro") {
@@ -240,7 +240,6 @@ function renderDetail(tomb: Tomb): void {
     `<div class="hero-overlay"></div>` +
     `<div class="container hero-inner"><div class="hero-content">` +
     `<a class="back-link" href="${fullHref("/home")}" data-nav="/home">${icon("arrow-left")} Volver al catálogo</a>` +
-    `<h1 class="detail-title">${esc(tomb.title)}</h1>` +
     `<div class="detail-meta">` +
     `<span>${esc(tomb.id)} · ${esc(tomb.years)}</span>` +
     `<span class="sep"></span>` +
@@ -251,7 +250,11 @@ function renderDetail(tomb: Tomb): void {
     `</div></div>` +
     `</section>` +
 
-    `<section class="detail-body"><div class="container detail-grid">` +
+    `<section class="detail-body">` +
+    `<figure class="detail-figure">` +
+    `<img class="detail-image" src="${esc(tomb.image)}" alt="${esc(tomb.title)}" />` +
+    `</figure>` +
+    `<div class="container detail-grid">` +
     `<div class="fact-grid">${facts}</div>` +
     sections +
     `</div></section>` +
@@ -298,16 +301,8 @@ function renderHistory(): void {
 
   const memory = HISTORY.memory
     .map((m) => {
-      const photo =
-        m.images.length > 0
-          ? `<img class="memory-photo" src="${esc(m.images[0])}" alt="${esc(m.heading)}" loading="lazy" />`
-          : `<div class="memory-photo memory-photo--empty">` +
-            icon("tombstone") +
-            `<span>Sin registro fotográfico</span>` +
-            `</div>`;
       return (
         `<article class="memory-card">` +
-        photo +
         `<h3 class="memory-heading">${esc(m.heading)}</h3>` +
         `<p>${esc(m.text)}</p>` +
         `</article>`

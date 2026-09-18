@@ -29,7 +29,7 @@ export const HISTORY: History = {
       role: "Benefactor del cementerio y la comunidad",
       description:
         "Propietario de los terrenos colindantes al cementerio a principios del siglo XX. Su relevancia y contribución fue la donación voluntaria de tierras en 1932, resolviendo la crisis de acceso al cementerio en época de invierno, permitiendo la construcción de la entrada principal y la actual Casa Comunal. Su acto solidario garantizó la viabilidad operativa del cementerio para las futuras generaciones.",
-      images: ["assets/img/entrada-1888.jpg"],
+      images: [],
     },
     {
       name: "Nayo Hernández",
@@ -65,7 +65,7 @@ export const HISTORY: History = {
     {
       heading: "Casa de la Memoria",
       text: "El cementerio funciona como una \"Casa de la Memoria\" al albergar los restos de figuras relevantes para la gestión y autonomía del barrio, como Nicolás Ramos (donante del terreno de la casa comunal en 1932), Marcelino Blanco, y expresidentes de la junta como Carlos Mirica y Claudio Dolmo.",
-      images: ["assets/img/entrada-1888.jpg"],
+      images: [],
     },
   ],
 };
